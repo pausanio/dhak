@@ -1,0 +1,267 @@
+# ------------------------------------------------------------------------------
+# @package    historischesarchivkoeln.de
+# @author     Maik Mettenheimer
+# @since      2011-12-05
+#
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+# ------------------------------------------------------------------------------
+
+# cms
+
+homepage:
+  url:   /
+  param: { module: home, action: index }
+
+localized_homepage:
+  url:   /:sf_culture/
+  param: { module: home, action: index }
+  requirements:
+    sf_culture: (?:de|en)
+
+netzwerk:
+  url:   /:sf_culture/netzwerk
+  param: { module: netzwerk, action: index }
+
+info:
+  url: /:sf_culture/info/:routename
+  param: { module: static, action: infocms, routename: '' }
+  requirements:
+    routename: ".+"
+
+intro:
+  url:  /:sf_culture/intro
+  param: { module: static, action: index, pagename: intro}
+
+forschen:
+  url:  /:sf_culture/forschen
+  param: { module: static, action: index, pagename: forschen}
+
+dhak:
+  url:  /:sf_culture/dhak
+  param: { module: static, action: index, pagename: dhak}
+
+hastk:
+  url:  /:sf_culture/hastk
+  param: { module: static, action: index, pagename: hastk}
+
+news:
+  url:   /:sf_culture/news.:sf_format
+  param: { module: news, action: index, sf_format: html }
+  requirements:
+      sf_format: (?:html|atom)
+
+news_show:
+  url:   /:sf_culture/news/:id
+  param: { module: news, action: show }
+  requirements:
+    id: \d+
+    sf_method: [get]
+
+faq:
+  url:   /:sf_culture/faq
+  param: { module: faq, action: index }
+
+faq_footer:
+  url:   /:sf_culture/frequently-asked-questions
+  param: { module: faq, action: footer }
+
+supporter:
+  url:   /:sf_culture/unterstuetzer
+  param: { module: user, action: supporter }
+
+team:
+  url:  /:sf_culture/team
+  param: { module: static, action: team, pagename: team}
+
+links:
+  url:  /:sf_culture/links
+  param: { module: static, action: links, pagename: links}
+
+impressum:
+  url:  /:sf_culture/impressum
+  param: { module: static, action: imprint, pagename: impressum}
+
+contact:
+  url:  /:sf_culture/contact
+  param: { module: static, action: contact, pagename: contact}
+
+mailform:
+  url: /mailform
+  param: {module: mailform}
+
+mailform_send:
+  url: /mailform/send
+  param: {module: mailform, action: send}
+
+newsletter:
+  url:  /:sf_culture/newsletter
+  param: { module: newsletter, action: index }
+
+newsletter_register:
+  url:  /:sf_culture/newsletter/registrierung
+  param: { module: newsletter, action: register }
+
+# patenschaft
+
+patenschaft:
+  url:   /:sf_culture/patenschaften/:type
+  param: { module: patenschaft, action: index, type: '01'}
+
+patenschaft_show:
+  url:   /:sf_culture/patenschaften/id/:id
+  param: { module: patenschaft, action: show }
+  requirements:
+    id: \d+
+    sf_method: [get]
+
+patenschaft_intro:
+  url:   /:sf_culture/patenschaft/intro
+  param: { module: patenschaft, action: intro , pagename: patenschaft_intro}
+
+patenschaft_kontakt:
+  url:   /:sf_culture/patenschaft/kontakt
+  param: { module: patenschaft, action: contact, pagename: patenschaft_kontakt}
+
+patenschaft_patenliste:
+  url:   /:sf_culture/patenschaft/patenliste
+  param: { module: patenschaft, action: intro , pagename: patenschaft_liste}
+
+
+# lesesaal
+lesesaal_root:
+  url:   /:sf_culture/lesesaal
+  param: { module: archiv, action: index }
+
+lesesaal_verzeichnungseinheit:
+  url: /:sf_culture/lesesaal/verzeichnungseinheit/:id/:slug
+  param: { module: archiv, action: verzeichnungseinheit }
+  options: {segment_separators: [/]}
+  requirements:
+    id: \d+
+    slug: ".+"
+
+lesesaal:
+  url:   /:sf_culture/lesesaal/:type/:id/:slug
+  param: { module: archiv, action: index }
+  requirements:
+    slug: ".+"
+
+lesesaal_search:
+  url:   /:sf_culture/lesesaal/search/
+  param: { module: sfLucene, action: search }
+  options: {segment_separators: [/]}
+
+lesesaal_dokument:
+  url: /:sf_culture/dokument/:id/:slug
+  param: { module: archiv, action: dokument }
+  options: {segment_separators: [/]}
+  requirements:
+    id: \d+
+
+stoebern:
+  url:   /:sf_culture/stoebern/:tags
+  param: { module: archiv, action: tags}
+
+dfgviewer_userdocs:
+  url:   /:sf_culture/dfgvieweruserdocs/:id
+  param: { module: archiv, action: metsUserDocs }
+  options: {segment_separators: [/]}
+  requirements:
+      sf_format: (?:xml)
+      ve_id: \d+
+
+dfgviewer:
+  url:   /:sf_culture/dfgviewer/:ve_id
+  param: { module: archiv, action: mets }
+  options: {segment_separators: [/]}
+  requirements:
+      sf_format: (?:xml)
+      ve_id: \d+
+
+document_pdf:
+  url:    /dokument/:bestand_sig/:sig/:doc_id.pdf
+  param:   { module: archiv, action: pdf }
+
+# user
+mein_archiv:
+  url:   /:sf_culture/mein-archiv
+  param: { module: meinArchiv, action: index }
+mein_archiv_delete:
+    url:   /mein-archiv/delete
+    param: { module: meinArchiv, action: delete }
+    requirements:
+          sf_method: [delete]
+mein_archiv_save:
+    url:   /mein-archiv/save
+    param: { module: meinArchiv, action: save }
+    requirements:
+          sf_method: [put]
+
+projekte:
+  class:   sfDoctrineRouteCollection
+  options: { model: HaProjekte,  prefix_path: /:sf_culture/projekte }
+
+dokument:
+  class:   sfDoctrineRouteCollection
+  options: { model: Dokument, prefix_path: /:sf_culture/meine-archivalien }
+
+dokument_tree:
+  url:   /meine-archivalien/tree
+  param: { module: dokument, action: tree }
+
+dokument_verzeichnungseinheiten:
+  url:   /meine-archivalien/verzeichnungseinheiten
+  param: { module: dokument, action: verzeichnungseinheiten }
+
+sf_guard_signin:
+  url:   /:sf_culture/login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /:sf_culture/logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_register:
+  url:   /:sf_culture/register
+  param: { module: sfGuardRegister, action: index }
+
+sf_guard_forgot_password:
+  url:   /:sf_culture/forgot_password
+  param: { module: sfGuardForgotPassword, action: index }
+
+sf_guard_profile:
+  url:   /:sf_culture/profile
+  param: { module: sfGuardUser, action: profile }
+
+sf_guard_profile_update:
+  url:   /:sf_culture/profile/update
+  param: { module: sfGuardUser, action: updateProfile }
+
+# Viewer
+viewer_imagemanipulation:
+  url: /viewer/image/:signatur/:image/:usergenerated
+  param: { module: viewer, action: image }
+viewer_save:
+  url: /viewer/save
+  param: { module: viewer, action: save }
+  requirements:
+      sf_method: [post]
+viewer_save_comments:
+  url: /viewer/savecomments
+  param: { module: viewer, action: saveComments }
+  requirements:
+      sf_method: [post]
+
+# ------------------------------------------------------------------ Redesign MM
+
+archiv:
+  url:   /archiv
+  param: { module: archiv, action: index }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

@@ -1,0 +1,38 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Patenobjekt
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          patenobjekt
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title:             Patenobjekte
+        display:           [=titel, typeName, statusName, verfuegbar, tekt_nr, bestand_sig, ve_signatur]
+        fields:
+          typeName:
+            label:         Kategorie
+          statusName:
+            label:         Status
+      filter:
+        display:           [titel, typefilter, statusfilter, verfuegbar]
+        fields:
+          typefilter:
+            label:         Kategorie
+          statusfilter:
+            label:         Status
+          verfuegbar:
+            label:         Verfügbar
+      form:    ~
+      edit:
+        title:             Patenobjekt bearbeiten: <small>%%titel%%</small>
+      new:
+        title:             Neues Patenobjekt

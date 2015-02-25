@@ -1,0 +1,152 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+all:
+
+  .general:
+    # tinymce setup, see: http://symfony-world.blogspot.com/2010/03/using-tinymce-with-symfony.html
+    tinymce_options_width: '480'
+    tinymce_options_height: '380'
+    tinymce_options: 'forced_root_block : "", entity_encoding : "raw", language : "de", plugins : "style,table,save,searchreplace,contextmenu,paste,fullscreen,visualchars,nonbreaking,template", theme_advanced_blockformats: "h1,h2,h3,h4", theme_advanced_buttons1: "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect", theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor", theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,iespell,media,advhr,|,fullscreen"'
+
+  sf_guard_plugin:
+    profile_class: sfGuardUserProfile
+    profile_field_name: user_id
+
+  lucene:
+    advanced: off
+    routes: off
+
+  baseurl:                  http://www.historischesarchivkoeln.de
+
+  docs_user:                <?php echo sfConfig::get('sf_root_dir') . '/doc/user/' . "\n" ?>
+  docs_dev:                 <?php echo sfConfig::get('sf_root_dir') . '/doc/dev/' . "\n" ?>
+
+  # wkCaptcha
+  wkCaptcha:
+    image_width: 160
+    image_height: 80
+    image_bg_color: "#fff"
+    perturbation: .8
+    code_length_min: 4
+    code_length_max: 6
+    num_lines: 4
+    noise_level: 3
+    text_color: "#333"
+    noise_color: "#111"
+    line_color: "#DDD"
+
+  # import data (xml + csv)
+  import:
+    archiv:                 <?php echo sfConfig::get('sf_data_dir') . '/import/archiv/' . "\n" ?>
+    bestand:                <?php echo sfConfig::get('sf_data_dir') . '/import/bestand/' . "\n" ?>
+    verzeichnungseinheit:   <?php echo sfConfig::get('sf_data_dir') . '/import/verzeichnungseinheit/' . "\n" ?>
+    dokument:               <?php echo sfConfig::get('sf_data_dir') . '/import/dokument/' . "\n" ?>
+    logsimport:             'logs/import'
+    logsvalidation:         'logs/validation'
+    logsfaildir:            'fail'
+
+  # import + user generated pictures
+  dokument:
+
+    max_width_thumb:        150
+    max_height_thumb:       150
+
+    max_width_medium:       600
+    max_height_medium:      600
+
+    web:                    /data/dokument/
+    user_web:               /data/dokument_user/
+
+    #symlink
+    filesystem:             <?php echo sfConfig::get('sf_web_dir') ?>/data/dokument/
+    user_filesystem:        <?php echo sfConfig::get('sf_web_dir') ?>/data/dokument_user/
+    user_filesystem_old:    <?php echo dirname(__FILE__) . '/../../dhastk_data/documents/org/' . "\n" ?>
+
+    pdf:                    <?php echo dirname(__FILE__) . '/../../dhastk_data/pdf/' . "\n" ?>
+    user_pdf:               <?php echo dirname(__FILE__) . '/../../dhastk_data/pdf/user/' . "\n" ?>
+    pdf_web:                /data/dokument/pdf/
+
+    placeholder_vorlagetyp: /images/vorlagetypen/
+
+    # email notification
+    notification_from:      info@historischesarchivkoeln.de
+    notification_to:        info@historischesarchivkoeln.de
+
+  # user settings
+  user:
+    # Prefix user generated Verzeichnungseinheiten
+    ve_signatur_prefix:  _UG-
+
+    # Archiv node type for user generated Verzeichnungseinheiten
+    ve_archiv_type:      10
+
+  # archiv contact person pictures
+  archivcontact:
+    web:         /uploads/ansprechpartner/
+    filesystem:  <?php echo sfConfig::get('sf_upload_dir') . '/ansprechpartner/' . "\n" ?>
+
+  mail:
+    patenschaft: monika.woywod@stadt-koeln.de
+    contact: info@historischesarchivkoeln.de
+    from: info@historischesarchivkoeln.de
+    name: 'DHAK'
+
+  cms:
+    image_quality: 80
+    thumb_quality: 80
+
+    slider_imagefile: <?php echo sfConfig::get('sf_web_dir') ?>/uploads/slider/
+    slider_imagefile_org: <?php echo sfConfig::get('sf_upload_dir') . '/slider/org/' . "\n" ?>
+    slider_image: /uploads/slider/
+    slider_image_org: /slider/org/
+    slider_image_maxwidth: 1160
+    slider_image_maxheight: 340
+
+    news_imagefile: <?php echo sfConfig::get('sf_web_dir') ?>/uploads/news/
+    news_imagefile_org: <?php echo sfConfig::get('sf_upload_dir') . '/news/org/' . "\n" ?>
+    news_image: /uploads/news/
+    news_image_org: /uploads/news/org/
+    news_image_maxwidth: 742
+    news_image_maxheight: 742
+
+    news_thumbfile: <?php echo sfConfig::get('sf_web_dir') ?>/uploads/news/thumbnails/
+    news_thumb: /uploads/news/thumbnails/
+    news_thumb_maxwidth: 270
+    news_thumb_maxheight: 110
+
+  # Patenschaften
+  photos:
+    patenobjekt_org:  <?php echo dirname(__FILE__) . '/../../dhastk_data/patenobjekt/org/' . "\n" ?>
+    patenobjekt_thumb:  <?php echo dirname(__FILE__) . '/../../dhastk_data/patenobjekt/thumb/' . "\n" ?>
+    patenobjekt_large:  <?php echo dirname(__FILE__) . '/../../dhastk_data/patenobjekt/large/' . "\n" ?>
+
+  # Newsletter registration
+  mailchimp:
+    apikey:       '097ee643b24c889cf8aae2f7454bc86a-us4'
+    listid:       '85e93fc7a5'
+    # YOUR MAILCHIMP CAMPAIGN ID - see campaigns() method
+    campaignid:   ''
+    apiurl:       'http://api.mailchimp.com/1.3/'
+
+#FORUM
+  prestaForumConnector:
+    userConnector:
+      class:  prestaSfGuardDoctrineConnector  # the name of the connector to use (here we use sfGuardPropel as user management tools)
+      param:
+        getUsernameMethod:  getUsername  # define here the name of the sfGuardUser's method to use for retrieving the username
+        getEmailMethod:     getEmailAddress    # define here the name of the sfGuardUser's method to use for retrieving the email (should be getEmailAddress for latest sfDoctrineGuardPlugin). Can be getUsername if the username is the email. If needed create yourself this method if the email is stored in another table like the profile table.
+        getCultureMethod:   getCulture   # define here the name of the sfGuardUser's method to use for retrieving the user's preferred culture. If needed create yourself this method if the culture is stored in another table like the profile table or if it is a constant.
+
+        # for the required parameters see the help related to the connector that you're using
+
+    forumConnector:
+      class:  prestaPhpBB3Connector  # the name of the connector to use (here we use phpBB3 as forum platform tools)
+      # param:
+        # for the required parameters see the help related to the connector that you're using
+
+    forumWebDir:             <?php echo sfConfig::get('sf_web_dir');?>/forum/ # path to the forum directory
+
+    forumDatabaseId:  phpbb  # the identifier of the database connection to use for the forum solution as defined in database.yml
+
+

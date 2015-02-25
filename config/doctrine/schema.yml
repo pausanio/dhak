@@ -1,0 +1,691 @@
+# ------------------------------------------------------------------------------
+# Database schema
+#
+# csDoctrineActAsSortablePlugin:
+# @see https://github.com/bshaffer/csDoctrineActAsSortablePlugin/blob/master/README.md
+#
+# @package    historischesarchivkoeln.de
+# @author     Maik Mettenheimer
+# @author     Ivo Bathke
+# @version    3.2
+# @since      2013-02-19
+# ------------------------------------------------------------------------------
+
+#----------------------------------------------------------------------- Content
+
+CmsText:
+  connection: doctrine
+  actAs:
+    Signable: ~
+    Timestampable: ~
+  columns:
+    module:
+      type: string(255)
+      notnull: true
+    name:
+      type: string(255)
+      notnull: true
+    text:
+      type: clob
+    comment:
+      type: string(255)
+
+CmsInfo:
+  connection: doctrine
+  actAs:
+    Timestampable: ~
+    Signable: ~
+    NestedSet:
+      hasManyRoots: true
+      rootColumnName: root_id
+  columns:
+    title:
+      type: string(255)
+      notnull: true
+    route_name:
+      type: string(255)
+      notnull: true
+    text_navi:
+      type: clob
+    text_top:
+      type: clob
+    text:
+      type: clob
+    is_active:
+      type: boolean
+      default: false
+      notnull: true
+    is_locked:
+      type: boolean
+      default: false
+      notnull: true
+  indexes:
+    route_name:
+      fields: [route_name]
+      type: unique
+
+CmsSlider:
+  connection: doctrine
+  actAs:
+    Timestampable: ~
+    Signable: ~
+    Sortable: ~
+  columns:
+    title:
+      type: string(255)
+      notnull: true
+    url:
+      type: string(255)
+      notnull: true
+    button_text:
+      type: string(42)
+      notnull: true
+    text:
+      type: clob
+    image:
+      type: string(255)
+    layout:
+      type: integer(1)
+      default: 0
+      notnull: true
+    is_active:
+      type: boolean
+      default: false
+      notnull: true
+
+HaFaq:
+  connection: doctrine
+  actAs:
+    Timestampable: ~
+    Signable: ~
+  columns:
+    question:
+      type: string(512)
+      notnull: true
+    answer:
+      type: string(4000)
+      notnull: true
+    pos:
+      type: integer(1)
+      default: 1
+      notnull: true
+
+HaNews:
+  connection: doctrine
+  actAs:
+    Signable: ~
+    Timestampable: ~
+    Taggable: ~
+  columns:
+    news_einsteller:
+      type: string(200)
+    news_title:
+      type: string(255)
+      notnull: true
+    news_text:
+      type: clob
+      notnull: true
+    publish_date:
+      type: timestamp(25)
+    image:
+      type: string(255)
+    status:
+      type: integer(1)
+      default: 0
+      notnull: true
+
+Tag:
+  connection: doctrine
+  columns:
+    name:
+      type: string(100)
+    is_triple:
+      type: integer(1)
+    triple_namespace:
+      type: string(100)
+    triple_key:
+      type: string(100)
+    triple_value:
+      type: string(100)
+
+Tagging:
+  connection: doctrine
+  columns:
+    tag_id:
+      type: integer(8)
+      notnull: true
+    taggable_model:
+      type: string(30)
+    taggable_id:
+      type: integer(8)
+
+#-------------------------------------------------------------------------- User
+
+sfGuardUserProfile:
+  connection: doctrine
+  tableName: sf_guard_user_profile
+  actAs:
+    Timestampable: ~
+    Signable: ~
+  columns:
+    user_id:
+      type: integer(8)
+      notnull: true
+    title_front:
+      type: string(100)
+      notnull: false
+    title_rear:
+      type: string(100)
+      notnull: false
+    institution:
+      type: string(255)
+      notnull: false
+    person_strasse:
+      type: string(255)
+      notnull: false
+    person_plz:
+      type: string(100)
+      notnull: false
+    person_ort:
+      type: string(255)
+      notnull: false
+    person_tel:
+      type: string(255)
+      notnull: false
+    role:
+      type: integer(2)
+      default: '5'
+      notnull: true
+    status:
+      type: integer(1)
+      default: '0'
+      notnull: true
+    person_support:
+      type: integer(1)
+      default: '0'
+      notnull: true
+    institution_support:
+      type: integer(1)
+      notnull: false
+    institution_ort:
+      type: string(255)
+      notnull: false
+    institution_strasse:
+      type: string(255)
+      notnull: false
+    institution_plz:
+      type: string(100)
+      notnull: false
+    institution_tel:
+      type: string(100)
+      notnull: false
+  relations:
+    User:
+      class: sfGuardUser
+      foreign: id
+      local: user_id
+      type: one
+      onDelete: cascade
+      foreignType: one
+      foreignAlias: Profile
+
+HaProjekte:
+  connection: doctrine
+  actAs:
+    Timestampable: ~
+    Signable: ~
+  columns:
+    projekt_title:
+      type: string()
+    projekt_type:
+      type: integer
+      notnull: true
+    projekt_einsteller:
+      type: string(255)
+      notnull: true
+    projekt_bestand:
+      type: string()
+    projekt_notiz:
+      type: string()
+    status:
+      type: integer(1)
+      default: 0
+      notnull: true
+  relations:
+    HaProjekttypen:
+      local: projekt_type
+      foreign: id
+    User:
+      class: sfGuardUser
+      foreign: id
+      local: created_by
+      onDelete: cascade
+
+HaProjekttypen:
+  connection: doctrine
+  tableName: ha_projekttypen
+  actAs:
+    Timestampable: ~
+    Signable: ~
+  columns:
+    name:
+      type: string(255)
+      notnull: true
+
+Patenobjekt:
+  connection: doctrine
+  actAs:
+    Signable: ~
+    Timestampable: ~
+  columns:
+    type:
+      type: integer(2)
+      notnull: true
+    titel:
+      type: string(255)
+      notnull: true
+    beschreibung:
+      type: string(4000)
+    inhalt:
+      type: string(4000)
+    zustand:
+      type: string(4000)
+    restaurierung:
+      type: string(4000)
+    massnahmen:
+      type: string(4000)
+    status:
+      type: integer(1)
+      default: 0
+      notnull: true
+    verfuegbar:
+      type: boolean
+      notnull: true
+      default: 0
+    tekt_nr:
+      type: string(15)
+    bestand_sig:
+      type: string(63)
+    ve_signatur:
+      type: string(63)
+
+PatenobjektPhoto:
+  connection: doctrine
+  columns:
+    patenobjekt_id:
+      type: integer
+    filename:
+      type: string(255)
+      notnull: true
+    position:
+      type: integer
+      notnull: true
+  relations:
+    Patenobjekt:
+      alias: Patenobjekt
+      foreignAlias: PatenobjektPhotos
+      onDelete: cascade
+
+#------------------------------------------------------------------------ Archiv
+
+Archiv:
+  connection: doctrine
+  actAs:
+    NestedSet:
+      hasManyRoots: false
+    Signable: ~
+    Timestampable: ~
+  columns:
+    signatur:
+      type: string(16)
+    name:
+      type: string(255)
+      notnull: true
+    type:
+      type: integer(2)
+    beschreibung:
+      type: string(4000)
+    user_description:
+      type: string(4000)
+    contactperson:
+      type: string(255)
+    contactperson_filename:
+      type: string(255)
+    count_ve:
+      type: integer
+      default: 0
+      notnull: true
+    count_docs:
+      type: integer
+      default: 0
+      notnull: true
+    count_userdocs:
+      type: integer
+      default: 0
+      notnull: true
+    status:
+      type: integer(1)
+      default: 1
+      notnull: true
+
+Bestand:
+  connection: doctrine
+  actAs:
+    Signable: ~
+    Timestampable: ~
+  columns:
+    archiv_id:
+      type: integer
+    bestand_sig:
+      type: string(63)
+      notnull: true
+      unique: false
+    bestandsname:
+      type: string(512)
+      notnull: true
+    laufzeit:
+      type: string(63)
+    bestand_inhalt:
+      type: string(4000)
+    umfang:
+      type: string(4000)
+    bem:
+      type: string(4000)
+    bestandsgeschichte:
+      type: string(4000)
+    sperrvermerk:
+      type: string(255)
+    abg_stelle:
+      type: string(255)
+    rechtsstatus:
+      type: string(255)
+    status:
+      type: integer(1)
+      default: 1
+      notnull: true
+  indexes:
+    archivindex:
+      fields: [archiv_id]
+    bestandsigindex:
+      fields: [bestand_sig]
+
+Vorlagentyp:
+  connection: doctrine
+  columns:
+    name:
+      type: string(255)
+      notnull: true
+    code:
+      type: string(255)
+      notnull: true
+
+Verzeichnungseinheit:
+  connection: doctrine
+  actAs:
+    Signable: ~
+    Timestampable: ~
+  columns:
+    archiv_id:
+      type: integer
+    bestand_sig:
+      type: string(63)
+      notnull: true
+    signatur:
+      type: string(63)
+      notnull: true
+    laufzeit:
+      type: string(63)
+    beschreibung:
+      type: string(4000)
+    titel:
+      type: string(4000)
+      notnull: true
+    sperrvermerk:
+      type: string(255)
+    bestellsig:
+      type: string(255)
+    archivgutart:
+      type: string(63)
+      notnull: false
+    altsig:
+      type: string(255)
+    umfang:
+      type: string(512)
+    enthaelt:
+      type: string(512)
+    bem:
+      type: string(4000)
+    status:
+      type: integer(1)
+      default: 1
+      notnull: true
+    user_description:
+      type: string(4000)
+  relations:
+    Bestand:
+      class: Bestand
+      local: bestand_sig
+      foreign: bestand_sig
+  indexes:
+    vz_archivindex:
+      fields: [archiv_id]
+
+Dokument:
+  connection: doctrine
+  actAs:
+    Timestampable: ~
+    Signable: ~
+    Sortable:
+      uniqueBy: [verzeichnungseinheit_id]
+  columns:
+    archiv_id:
+      type: integer
+    bestand_sig:
+      type: string(63)
+    signatur:
+      type: string(63)
+    verzeichnungseinheit_id:
+      type: integer
+    titel:
+      type: string(255)
+    beschreibung:
+      type: string(4000)
+    filename:
+      type: string(255)
+    datierung:
+      type: string(255)
+    date_day:
+      type: integer(4)
+      default: 0
+      notnull: true
+    date_month:
+      type: integer(4)
+      default: 0
+      notnull: true
+    date_year:
+      type: integer(4)
+      default: 0
+      notnull: true
+    position:
+      type: integer
+    vorlagentyp_id:
+      type: integer
+      default: 0
+    kommentar:
+      type: string(4000)
+    folio:
+      type: string(255)
+    copyright:
+      type: string(500)
+    einsteller:
+      type: string(255)
+    status:
+      type: integer(1)
+      notnull: true
+      default: 1
+    usergenerated:
+      type: integer(1)
+      notnull: true
+      default: 0
+    user_description:
+      type: string(4000)
+    validated:
+      type: integer(1)
+      notnull: true
+      default: 0
+  relations:
+    Verzeichnungseinheit:
+      alias: Verzeichnungseinheit
+      foreignAlias: Dokumente
+      onDelete: cascade
+    Vorlagentyp:
+      local: vorlagentyp_id
+      foreign: id
+      onDelete: set null
+
+Vorgang:
+  connection: doctrine
+  actAs:
+    Signable: ~
+    Timestampable: ~
+  columns:
+    bestand_sig:
+      type: string(63)
+      notnull: true
+    ve_signatur:
+      type: string(63)
+      notnull: true
+    laufzeit:
+      type: string(63)
+    titel:
+      type: string(4000)
+      notnull: true
+    bestellsig:
+      type: string(255)
+    umfang:
+      type: string(255)
+    archivgutart:
+      type: string(63)
+      notnull: false
+    status:
+      type: integer(1)
+      default: 1
+      notnull: true
+
+Verweis:
+  connection: doctrine
+  actAs:
+    Signable: ~
+    Timestampable: ~
+  columns:
+    archiv_id:
+      type: integer
+    bestand_sig:
+      type: string(63)
+      notnull: true
+    laufzeit:
+      type: string(63)
+    beschreibung:
+      type: string(4000)
+    titel:
+      type: string(4000)
+      notnull: true
+    sperrvermerk:
+      type: string(255)
+    bestellsig:
+      type: string(255)
+    archivgutart:
+      type: string(63)
+      notnull: false
+    altsig:
+      type: string(255)
+    umfang:
+      type: string(255)
+    bem:
+      type: string(4000)
+    status:
+      type: integer(1)
+      default: 1
+      notnull: true
+  indexes:
+    vz_archivindex:
+      fields: [archiv_id]
+
+MyVerzeichnungseinheit:
+  connection: doctrine
+  actAs:
+      Signable: ~
+      Timestampable: ~
+  columns:
+      verzeichnungseinheit_id:
+        type: integer
+      viewer_settings:
+        type: string(4000)
+      personal_comments:
+        type: clob
+  relations:
+      Verzeichnungseinheit:
+        class: Verzeichnungseinheit
+        foreign: id
+        local: verzeichnungseinheit_id
+        onDelete: cascade
+      User:
+        class: sfGuardUser
+        foreign: id
+        local: created_by
+        onDelete: cascade
+  indexes:
+        dokument_index:
+            fields: [verzeichnungseinheit_id]
+
+MyDokumente:
+  connection: doctrine
+  actAs:
+      Signable: ~
+      Timestampable: ~
+  columns:
+    dokument_id:
+        type: integer
+    viewer_settings:
+      type: string(4000)
+    personal_comments:
+      type: clob
+  relations:
+    Dokumente:
+      class: Dokument
+      foreign: id
+      local: dokument_id
+      onDelete: cascade
+    User:
+      class: sfGuardUser
+      foreign: id
+      local: created_by
+      onDelete: cascade
+  indexes:
+      dokument_index:
+        fields: [dokument_id]
+
+MyArchiv:
+  connection: doctrine
+  actAs:
+     Signable: ~
+     Timestampable: ~
+  columns:
+     archiv_id:
+         type: integer
+     personal_comments:
+       type: clob
+  relations:
+     Archiv:
+       class: Archiv
+       foreign: id
+       local: archiv_id
+       onDelete: cascade
+     User:
+       class: sfGuardUser
+       foreign: id
+       local: created_by
+       onDelete: cascade
+  indexes:
+     dokument_index:
+         fields: [archiv_id]

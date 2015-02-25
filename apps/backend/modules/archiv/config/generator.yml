@@ -1,0 +1,27 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Archiv
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          archiv
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        max_per_page:      100
+        title:             Archiv <small>Listenansicht</small>
+        display:           [id, signatur, model, name]
+      filter:
+        display:           [signatur, name, type]
+      form:
+        class:             BackendArchivForm
+      edit:
+        title:             Archiv bearbeiten
+      new:     ~

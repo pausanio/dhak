@@ -1,0 +1,41 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           CmsSlider
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          cms_slider
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        title: {label: Titel }
+        text: {label: Text }
+        is_active: {label: Aktiviert }
+      list:
+        title: Slider Elemente
+        display: [=title]
+        sort: [position]
+        object_actions:
+          promote:
+            label: Hoch
+            action: promote
+          demote:
+            label: Runter
+            action: demote
+          _edit:        ~
+          _delete:      ~
+      filter:
+        display: [title]
+      form:
+        display: [title, text, image, url, button_text, layout, is_active, position]
+      edit:
+        title: Slider bearbeiten: <small>%%title%%</small>
+      new:
+        title: Neuer Slider
+

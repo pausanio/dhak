@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd" >
+<xliff version="1.0">
+  <file original="global" source-language="en" datatype="plaintext">
+    <header/>
+    <body>
+      <trans-unit>
+        <source>Username</source>
+        <target>Benutzername</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Password</source>
+        <target>Kennwort</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Request</source>
+        <target>Senden</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Remember</source>
+        <target>Merken</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Signin</source>
+        <target>Anmelden</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Email address</source>
+        <target>Email-Addresse</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Forgot your password?</source>
+        <target>Kennwort vergessen?</target>
+      </trans-unit>
+      <trans-unit>
+        <source>You don't have the required permission to access this page.</source>
+        <target>Sie besitzen nicht die notwendigen Rechte, um auf diese Seite zuzugreifen.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Do not worry, we can help you get back in to your account safely!</source>
+        <target>Keine Sorge, wir helfen Ihnen, damit Sie sich wieder mit Ihrem Benutzernamen anmelden können.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Fill out the form below to request an e-mail with information on how to reset your password.</source>
+        <target>Bitte tragen Sie hier Ihre Email-Adresse ein. Wir senden Ihnen dann Informationen, wie Sie Ihr Kennwort zurücksetzen können.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

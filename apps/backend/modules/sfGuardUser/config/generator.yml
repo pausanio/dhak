@@ -1,0 +1,39 @@
+# generator:
+#   param:
+#     config:
+#       form:
+#         class: sfGuardUserAdminForm
+#         display:
+#           "Profile": [institution]
+
+generator:
+  class: sfDoctrineGenerator
+  param:
+    config:
+      list:
+        title:            Benutzer
+        fields:
+          username:       { label: Benutzername }
+          password:       { label: Kennwort }
+          password_again: { label: Kennwort wiederholen }
+          is_active:      { label: Aktiv }
+          first_name:     { label: Vorname }
+          last_name:      { label: Nachname }
+          email_address:  { label: Email }
+          created_at:     { label: Registriert, date_format: dd.MM.y}
+          updated_at:     { label: Aktualisiert, date_format: dd.MM.y}
+      filter:
+        display:          [username, last_name, email_address, is_active, created_at, updated_at, groups_list]
+      form:
+        class:            sfGuardUserAdminForm
+        display:
+#merge
+#          "User": [username, password, password_again, is_active, title_front, first_name, last_name, title_rear, email_address, person_strasse, person_plz, person_ort, person_tel, person_support, institution, institution_plz, institution_ort, institution_tel, institution_support]
+#embed
+          "User":       [username, password, password_again, is_active, first_name, last_name, email_address, Profile]
+          "Permissions and groups": [groups_list, permissions_list]
+#          "Profile": [title_front]
+      edit:
+        title:             Benutzer bearbeiten: <small>%%first_name%% %%last_name%%</small>
+      new:
+        title:             Neuer Benutzer

@@ -1,0 +1,26 @@
+#------------------------------------------------------------------------------
+# Frontend view setup
+#
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+#------------------------------------------------------------------------------
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        TITLE (apps/backend/view.yml)
+    description:  DESCRIPTION (apps/backend/view.yml)
+    language:     de
+    robots:       index, follow
+
+  stylesheets:    [/stylesheets/frontend.css]
+  javascripts:    [/javascripts/lib/jquery.1.10.min.js, /javascripts/lib/bootstrap.min.js, /javascripts/lib/jquery.bxslider.min.js, /javascripts/lib/jquery.listnav.min-2.1.js, /javascripts/lib/jquery.expander.min.js, /javascripts/lib/jquery-ui-1.10.3.custom.min.js, /javascripts/lib/jquery.jBreadCrumb1.1.js, /javascripts/lib/jquery.sticky.js, /javascripts/frontend/application.js]
+
+  has_layout:     true
+  layout:         layout
+
+dokumentSuccess:
+  javascripts: [-/javascripts/lib/jquery.bxslider.min.js, -/javascripts/lib/jquery.listnav.min-2.1.js, -/javascripts/lib/jquery.expander.min.js, /javascripts/lib/jquery.mousewheel.min.js, /javascripts/lib/jquery.lhpGigaImgViewer.js, -/javascripts/lib/jquery.sticky.js, /javascripts/lib/bootstrap.slider.min.js]
+

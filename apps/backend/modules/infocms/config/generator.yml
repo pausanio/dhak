@@ -1,0 +1,40 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           CmsInfo
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          cms_info
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        title: {label: Titel }
+        text: {label: Text }
+        is_active: {label: Aktiviert }
+      list:
+        title: "CMS für Info-Seiten"
+        display: [=title]
+        max_per_page: 999999
+        batch_actions:
+          order:
+            label: Reihenfolge ändern
+          _delete: ~
+        object_actions:
+          new:
+            label: Unterseite hinzufügen
+          _edit:    ~
+          _delete:  ~
+      filter:
+        class: false
+      form:
+        display: [title, route_name, text_navi, text, is_active, parent_id]
+      edit:
+        title: Info Seite bearbeiten: <small>%%title%%</small>
+      new:
+        title: "Neue Info Seite"

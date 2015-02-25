@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+    <file source-language="DE" target-language="en" datatype="plaintext" original="messages" date="2010-12-21T01:10:23Z"
+          product-name="messages">
+        <header/>
+        <body>
+            <trans-unit id="1">
+                <source>Benutzername:*</source>
+                <target>Username</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Vorname:</source>
+                <target>First Name*:</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Vorangestellter Titel (z.B. Dr.):</source>
+                <target>Prefixed title (e.g. Dr.):</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Nachname:</source>
+                <target>Last Name</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>Nachgestellter Titel (z.B. M.A.):</source>
+                <target>Postnominal title (e.g. M.A.):</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>Passwort*</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Passwort-Wiederholung*</source>
+                <target>Repeat Password</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Alle Felder mit * müssen ausgefüllt werden!</source>
+                <target>All fields marked with * need to be filled out!</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>optional: Adressdaten</source>
+                <target>optional: Adress data</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>optional: Adressdaten</source>
+                <target>optional: Adress Data</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>Strasse, Hausnummer:</source>
+                <target>Street</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>PLZ:</source>
+                <target>Zip Code</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>Ort:</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source></source>
+                <target></target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>Telefon:</source>
+                <target>Phone</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>Ich möchte in der Liste der Unterstützer namentlich genannt werden (Vorname Nachname, Ort)!
+                </source>
+                <target>I agree that my name (first name, last name, city) will appear in the supporter list!</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>optional: Institutionsdaten</source>
+                <target>optional: Data of your institution</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>Name Ihrer Institution:</source>
+                <target>Name of Your Institution:</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>Meine Institution soll in der Liste der Unterstützer namentlich genannt werden!</source>
+                <target>I agree that the name of my institution can appear in the supporter list!</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>Required.</source>
+                <target>Required!</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
+
+
+

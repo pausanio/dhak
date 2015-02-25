@@ -1,0 +1,48 @@
+table.treetable span.indenter { display: inline-block; margin: 0; padding: 0; text-align: right; user-select: none; -khtml-user-select: none; -moz-user-select: none; -o-user-select: none; -webkit-user-select: none; width: 19px; }
+
+table.treetable span.indenter a { background-position: left center; background-repeat: no-repeat; display: inline-block; text-decoration: none; width: 19px; }
+
+/* jQuery TreeTable Core 2.0 stylesheet  This file contains styles that are used to display the tree table. Each tree table is assigned the +treetable+ class. ========================================================================= */
+/* jquery.treetable.collapsible ------------------------------------------------------------------------- */
+.treetable tr td .expander { background-position: left center; background-repeat: no-repeat; cursor: pointer; padding: 0; zoom: 1; /* IE7 Hack */ }
+
+.treetable tr.collapsed td .expander { background-image: url(../images/backend/toggle-expand-dark.png); }
+
+.treetable tr.expanded td .expander { background-image: url(../images/backend/toggle-collapse-dark.png); }
+
+/* jquery.treetable.sortable ------------------------------------------------------------------------- */
+table.treetable { border: 1px solid #888; border-collapse: collapse; font-size: .8em; line-height: 1; margin: .6em 0 1.8em 0; width: 100%; }
+
+table.treetable caption { font-size: .9em; font-weight: bold; margin-bottom: .2em; }
+
+table.treetable thead { background: #aaaaaa url(../images/backend/bg-table-thead.png) repeat-x top left; font-size: .9em; }
+
+table.treetable thead tr th { border: 1px solid #888; font-weight: normal; padding: .3em 1em .1em 1em; text-align: left; }
+
+table.treetable tbody tr td { cursor: default; padding: .3em 1em; }
+
+table.treetable span { background-position: center left; background-repeat: no-repeat; padding: .2em 0 .2em 1.5em; }
+
+table.treetable span.file { background-image: url(../images/backend/file.png); }
+
+table.treetable span.folder { background-image: url(../images/backend/folder.png); }
+
+table.treetable tr.collapsed span.indenter a { background-image: url(../images/backend/expand.png); }
+
+table.treetable tr.expanded span.indenter a { background-image: url(../images/backend/collapse.png); }
+
+table.treetable tr.branch { background-color: #f9f9f9; }
+
+table.treetable tr.selected { background-color: #3875d7; color: silver; }
+
+table.treetable tr.collapsed.selected span.indenter a { background-image: url(../images/backend/expand-light.png); }
+
+table.treetable tr.expanded.selected span.indenter a { background-image: url(../images/backend/collapse-light.png); }
+
+table.treetable tr.accept { background-color: #a3bce4; color: white; }
+
+table.treetable tr.collapsed.accept td span.indenter a { background-image: url(../images/backend/expand-light.png); }
+
+table.treetable tr.expanded.accept td span.indenter a { background-image: url(../images/backend/collapse-light.png); }
+
+.treetable .ui-draggable-dragging { color: #000; z-index: 1; }

@@ -1,0 +1,23 @@
+all:
+  prestaForumConnector:
+    userConnector:
+      class:  prestaSfGuardPropelConnector
+#      param: 
+#      parameters for sfGuardPropel and sfGuardDoctrine
+#        getUsernameMethod:  getUsername
+#        getEmailMethod:     getEmail
+#        getIsActiveMethod:  getIsActive
+#        setUsernameMethod:  setUsername # for testing purpose
+#        setEmailMethod:     setUsername # for testing purpose
+#        setPasswordlMethod: setPassword # for testing purpose
+#        setIsActiveMethod:  setIsActive # for testing purpose
+      
+    forumConnector:
+      class:  prestaPhpBB3Connector
+#      param: 
+#      parameters for phpBB3
+#        forumFieldProjectUserId: project_user_id
+        
+    forumWebDir:             <?php echo sfConfig::get('sf_web_dir');?>/forum/ # path to the forum directory 
+    
+    forumDatabaseId:        default  # the identifier of the database connection to use as define in database.yml

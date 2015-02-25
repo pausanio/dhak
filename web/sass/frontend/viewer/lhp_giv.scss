@@ -1,0 +1,373 @@
+@import "compass";
+
+/*
+    * cursors
+*/
+.lhp_cursor_drag {
+  /*cursor: url(lhp_giv/cursorDrag.png), move;*/
+  cursor: image-url("lhp_giv/cursorDrag.png"), move;
+}
+
+.lhp_cursor_hand {
+  /*cursor: url(lhp_giv/cursorHand.png), default;*/
+  cursor: image-url("lhp_giv/cursorHand.png"), default;
+}
+
+/*
+    * navigation
+*/
+.lhp_giv_nav {
+  position: absolute;
+  z-index: 5;
+  @include background-image(linear-gradient(white, #f2f2f2));
+  border: 1px solid #d4d4d4;
+  /*height:auto;
+      min-height:33px;
+  height:auto !important;         for IE as it does not support min-height */
+  height: 33px;
+}
+
+.lhp_giv_nav_pos_T {
+  top: 5px;
+  left: 50%;
+}
+
+.lhp_giv_nav_pos_TL {
+  top: 5px;
+  left: 5px;
+}
+
+.lhp_giv_nav_pos_TR {
+  top: 5px;
+  right: 5px;
+}
+
+.lhp_giv_nav_pos_B {
+  left: 10%;
+  bottom: 5px;
+}
+
+.lhp_giv_nav_pos_BL {
+  bottom: 5px;
+  left: 5px;
+}
+
+.lhp_giv_nav_pos_BR {
+  bottom: 5px;
+  right: 5px;
+}
+
+.lhp_giv_nav_pos_L {
+  left: 5px;
+  top: 50%;
+}
+
+.lhp_giv_nav_pos_R {
+  right: 5px;
+  top: 50%;
+}
+
+.lhp_giv_nav ul {
+  margin: 0;
+  padding: 3px 4px 0 4px;
+}
+
+.lhp_giv_nav ul li {
+  position: relative;
+  padding: 4px 2px;
+  cursor: pointer;
+  float: left;
+  list-style: none;
+  margin-right: 1px;
+  margin-bottom: 1px;
+  &.icon-grabber {
+    background: image-url("bootstrap/icon-grabber.png") repeat-y top left;
+    padding-left: 0;
+    padding-right: 0;
+    height: 18px;
+    width: 10px;
+    cursor: url('../images/lhp_giv/cursorHand.png'), default;
+  }
+  i {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  i:hover {
+    @include opacity(0.8);
+  }
+  #viewer-paging-current {
+    width: 23px;
+    height: 12px;
+    font-size: 80%;
+    margin-bottom: 0;
+  }
+  &.viewer-paging {
+    vertical-align: middle;
+    text-align: left;
+    padding-right: 3px;
+  }
+  &.viewer-tostart {
+    padding-right: 3px;
+    padding-left: 3px;
+    width: 10px;
+    border-left: 1px solid #D4D4D4;
+  }
+  &.viewer-paging-backward {
+    padding-right: 0;
+    margin-left: 3px;
+    i {
+      padding-right: 0;
+    }
+  }
+  &.viewer-paging-forward {
+    padding-right: 0;
+    padding-left: 3px;
+    width: 16px;
+  }
+  &.viewer-toend {
+    border-right: 1px solid #D4D4D4;
+    padding-right: 0;
+  }
+  &.collapsable {
+    border-right: 1px solid #D4D4D4;
+  }
+  &.collapsable {
+    padding-left: 4px;
+  }
+  &.openclose {
+    border-left: 1px solid #D4D4D4;
+    padding-left: 7px;
+  }
+  &.extend {
+    display: none;
+    &.contrast, &.saturation, &.brightness {
+      input {
+        display: none;
+      }
+    }
+  }
+}
+
+ul li.lhp_giv_nav_btt_disab {
+  cursor: default;
+}
+
+/*
+    * map
+*/
+.lhp_giv_map {
+  position: absolute;
+  z-index: 4;
+}
+
+.lhp_giv_map_pos_T {
+  left: 50%;
+}
+
+.lhp_giv_map_pos_TL {
+
+}
+
+.lhp_giv_map_pos_TR {
+  position: absolute;
+  right: 0;
+}
+
+.lhp_giv_map_pos_B {
+  left: 50%;
+  bottom: 0;
+  position: absolute;
+}
+
+.lhp_giv_map_pos_BL {
+  bottom: 0;
+  position: absolute;
+}
+
+.lhp_giv_map_pos_BR {
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}
+
+.lhp_giv_map_pos_L {
+  top: 50%;
+}
+
+.lhp_giv_map_pos_R {
+  right: 0;
+  position: absolute;
+  top: 50%;
+}
+
+.lhp_giv_map_wrapp_hol {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #000;
+}
+
+.lhp_giv_map_wrapp_hol_T {
+  border-top: none;
+}
+
+.lhp_giv_map_wrapp_hol_TL {
+  border-top: none;
+  border-left: none;
+}
+
+.lhp_giv_map_wrapp_hol_TR {
+  border-right: none;
+  border-top: none;
+}
+
+.lhp_giv_map_wrapp_hol_B {
+  position: absolute;
+  border-bottom: none;
+}
+
+.lhp_giv_map_wrapp_hol_BL {
+  border-left: none;
+  border-bottom: none;
+}
+
+.lhp_giv_map_wrapp_hol_BR {
+  border-right: none;
+  border-bottom: none;
+}
+
+.lhp_giv_map_wrapp_hol_L {
+  border-left: none;
+}
+
+.lhp_giv_map_wrapp_hol_R {
+  border-right: none;
+}
+
+.lhp_giv_map_vr {
+  background: #000;
+  opacity: 0.5;
+}
+
+.lhp_giv_map_vr_over {
+  background: #4cf1fe;
+}
+
+/*
+    * preloader
+*/
+.lhp_giv_preload_holder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -17px;
+  margin-left: -17px;
+  z-index: 3;
+  width: 33px;
+  height: 33px;
+  background: #fff image-url("lhp_giv/ajax-loader.gif") no-repeat center;
+  opacity: .5;
+  border-radius: 17px;
+}
+
+/*
+    * info box
+*/
+.lhp_giv_infoBox_holder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  padding: 2px 6px;
+  background: #262626;
+  font: 10px arial, sans-serif;
+  color: #ddd;
+  display: none;
+}
+
+/*
+    * markers
+*/
+.lhp_giv_hotspot .lhp_giv_marker {
+
+}
+
+.lhp_giv_hotspot .pos-TL {
+
+}
+
+.lhp_giv_hotspot .pos-T {
+  position: relative;
+  left: -50%;
+}
+
+.lhp_giv_hotspot .pos-TR {
+  position: relative;
+  left: -100%;
+}
+
+.lhp_giv_hotspot .pos-L {
+  position: relative;
+  top: -50%;
+}
+
+.lhp_giv_hotspot .pos-C {
+  position: relative;
+  top: -50%;
+  left: -50%;
+}
+
+.lhp_giv_hotspot .pos-R {
+  position: relative;
+  top: -50%;
+  left: -100%;
+}
+
+.lhp_giv_hotspot .pos-BL {
+  position: relative;
+  top: -100%;
+}
+
+.lhp_giv_hotspot .pos-B {
+  position: relative;
+  top: -100%;
+  left: -50%;
+}
+
+.lhp_giv_hotspot .pos-BR {
+  position: relative;
+  top: -100%;
+  left: -100%;
+}
+
+.lhp_giv_popup_close {
+  position: absolute;
+  z-index: 1000;
+  width: 15px;
+  height: 15px;
+  right: 14px;
+  top: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  background: 00 c6ff image-url("lhp_giv/popupClose.png") no-repeat center;
+}
+
+/* custom icons */
+
+.icon-invert {
+  background-image: url('../images/bootstrap/halflings_custom.png');
+  background-position: -51px -5px;
+}
+
+.icon-minimap {
+  background-image: url('../images/bootstrap/halflings_custom.png');
+  background-position: -22px -5px;
+}
+.icon-nominimap {
+  background-image: url('../images/bootstrap/halflings_custom.png');
+  background-position: -22px -5px;
+}
+
+.icon-unlock {
+  background-image: url('../images/bootstrap/halflings_custom.png');
+  background-position: -75px -6px;
+}

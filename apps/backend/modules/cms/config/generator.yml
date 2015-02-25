@@ -1,0 +1,39 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           CmsText
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          cms_text
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        module: {label: Modul }
+        text_de: {label: Text }
+        comment: {label: Kommentar }
+      list:
+        title: Website-Texte
+        display: [=name, module, text_substr]
+        sort: [module,name]
+      filter:
+        display: [module, name, comment]
+      form:
+        display: [module, name, text, comment]
+        fields:
+          module:
+            attributes: {size: 93}
+          name:
+            attributes: {size: 93}
+          comment:
+            attributes: {size: 93}
+      edit:
+        title: Website-Text bearbeiten: <small>%%module%% -> %%name%%</small>
+      new:
+        title: Neuer Website-Text
+

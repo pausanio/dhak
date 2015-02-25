@@ -1,0 +1,292 @@
+/*
+    Document   : admin.css
+    Created on : 01.12.2011, 16:53
+    Author     : Maik Mettenheimer
+*/
+
+/* =============================================================================
+   Reset
+   ========================================================================== */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+strong {
+  font-weight: bold;
+}
+
+/* =============================================================================
+   Non-semantic helper classes
+   Please define your styles before this section.
+   ========================================================================== */
+
+/* For image replacement */
+.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.ir br { display: none; }
+
+/* Hide for both screenreaders and browsers:
+   css-discuss.incutio.com/wiki/Screenreader_Visibility */
+.hidden { display: none; visibility: hidden; }
+
+/* Hide only visually, but have it available for screenreaders: by Jon Neal.
+  www.webaim.org/techniques/css/invisiblecontent/  &  j.mp/visuallyhidden */
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: drupal.org/node/897638 */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+/* Contain floats: nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+.left { float: left; }
+.right { float: right; }
+
+/* =============================================================================
+   Generic
+   ========================================================================== */
+
+body {
+  background: rgb(234,234,234);
+  font: 14px/1.5 "Lucida Grande", Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+#header {
+  background: url('../images/admin/background.jpg') #666;
+  color: #eee;
+  padding: 25px;
+}
+
+#header h1 {
+  width: auto;
+  float: left;
+}
+
+#header #account {
+  float: right;
+  font-size: 90%;
+}
+
+#container {
+  width: 100%;
+  background: none;
+}
+
+#content {
+  padding: 0 25px 25px;
+}
+
+#content h1 {
+margin-top: 10px;
+padding: 0px 15px;
+text-transform: uppercase;
+line-height: 32px;
+  padding: 0;
+  background: transparent;
+  margin-bottom: 20px;
+  font-size: 140%;
+  color: #000;
+}
+
+#footer {
+  background: url('../images/admin/background.jpg') #666;
+  color: #ccc;
+  font-size: 80%;
+  padding: 25px;
+}
+
+#footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#footer a:hover {
+  text-decoration: underline;
+}
+
+#footer img {
+  vertical-align: middle;
+}
+
+#sf_admin_container fieldset h2 {
+  font-size: 110%;
+  font-family: arial,sans-serif;
+  font-style: italic;
+}
+
+.error_list {
+  color: red;
+}
+
+th {
+  font-weight: bold;
+  text-align: left;
+}
+
+td, th {
+padding: 7px;
+}
+
+/* =============================================================================
+   List
+   ========================================================================== */
+
+#sf_admin_bar .sf_admin_filter {
+  font-size: 90%;
+}
+
+/* =============================================================================
+   Custom
+   ========================================================================== */
+
+.tag-suggestions.tag-spacer { display: none; }
+.a-existing, .a-link .a-tag-count {padding:3px;}
+.a-tag-count {padding:0 6px 0 2px;}
+
+/* =============================================================================
+   Main navigation (superfish menu)
+   ========================================================================== */
+
+/* Essential styles */
+
+.sf-menu, .sf-menu * {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sf-menu {
+  line-height: 1.0;
+}
+.sf-menu ul {
+  position: absolute;
+  top: -999em;
+  width: 12em; /* left offset of submenus need to match (see below) */
+}
+.sf-menu ul li {
+  width: 100%;
+}
+.sf-menu li:hover {
+  visibility:	inherit; /* fixes IE7 'sticky bug' */
+}
+.sf-menu li {
+  float: left;
+  position:	relative;
+}
+.sf-menu a {
+  display: block;
+  position: relative;
+}
+.sf-menu li:hover ul,
+.sf-menu li.sfHover ul {
+  left:	0;
+  top: 2.5em; /* match top ul list item height */
+  z-index: 99;
+}
+ul.sf-menu li:hover li ul,
+ul.sf-menu li.sfHover li ul {
+  top: -999em;
+}
+ul.sf-menu li li:hover ul,
+ul.sf-menu li li.sfHover ul {
+  left:	12em; /* match ul width */
+  top: 0;
+}
+ul.sf-menu li li:hover li ul,
+ul.sf-menu li li.sfHover li ul {
+  top: -999em;
+}
+ul.sf-menu li li li:hover ul,
+ul.sf-menu li li li.sfHover ul {
+  left: 12em; /* match ul width */
+  top: 0;
+}
+
+/* custom style */
+
+#menu {
+  padding: 10px;
+  padding-left: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #aaa;
+  background-color: #fff;
+  height: 16px;
+}
+
+#menu ul ul {
+  background-color: #fff;
+  border-bottom: 1px solid #aaa;
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  padding: 10px;
+  top: 26px;
+  left: -10px;
+}
+
+#menu li {
+  margin-right: 15px;
+  display: inline;
+}
+
+#menu li.logout {
+  float: right;
+}
+
+#menu li.logout a {
+  background: url(../images/admin/logout.png) no-repeat left center;
+  padding-left: 20px;
+}
+
+#menu a {
+  color: #444;
+  text-decoration: none;
+}
+
+#menu a:hover {
+  text-decoration: underline;
+}

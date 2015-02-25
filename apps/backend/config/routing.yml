@@ -1,0 +1,174 @@
+cms_info:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                CmsInfo
+    module:               infocms
+    prefix_path:          /infocms
+    column:               id
+    with_wildcard_routes: true
+
+cms_info_updateroute:
+  url: /infocms/updateroute
+  param: { module: infocms, action: updateroute }
+  requirements:
+    sf_method: [post]
+
+import:
+  url: /import
+  param: { module: import, action: index }
+
+import_showfile:
+  url: /import/show/:folder/:file
+  param: { module: import, action: show }
+  options:
+    segment_separators: ['/']
+  requirements:
+    sf_method: [get]
+
+import_showlog:
+  url: /import/showlog/:folder/:type/:file
+  param: { module: import, action: showlog }
+  options:
+    segment_separators: ['/']
+  requirements:
+    sf_method: [get]
+
+archiv_tree:
+  url:   /archiv/tree/:id
+  param: { module: archiv, action: tree }
+  requirements:
+    id: \d+
+    sf_method: [get]
+
+archiv:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Archiv
+    module:               archiv
+    prefix_path:          /archiv
+    column:               id
+    with_wildcard_routes: true
+
+bestand:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Bestand
+    module:               bestand
+    prefix_path:          /bestand
+    column:               id
+    with_wildcard_routes: true
+
+verzeichnungseinheit:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Verzeichnungseinheit
+    module:               verzeichnungseinheit
+    prefix_path:          /verzeichnungseinheit
+    column:               id
+    with_wildcard_routes: true
+
+dokument:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Dokument
+    module:               dokument
+    prefix_path:          /dokument
+    column:               id
+    with_wildcard_routes: true
+
+dokument_findarchiv:
+  url:   /dokument/findarchiv
+  param: { module: dokument, action: findarchiv }
+
+dokument_tree:
+  url:   /dokument/tree
+  param: { module: dokument, action: tree }
+
+dokument_verzeichnungseinheiten:
+  url:   /dokument/verzeichnungseinheiten
+  param: { module: dokument, action: verzeichnungseinheiten }
+
+patenobjekt:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Patenobjekt
+    module:               patenobjekt
+    prefix_path:          /patenobjekt
+    column:               id
+    with_wildcard_routes: true
+
+ha_projekte:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                HaProjekte
+    module:               projekte
+    prefix_path:          /projekte
+    column:               id
+    with_wildcard_routes: true
+
+ha_faq:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                HaFaq
+    module:               faq
+    prefix_path:          /faq
+    column:               id
+    with_wildcard_routes: true
+
+cms_text:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                CmsText
+    module:               cms
+    prefix_path:          /cms
+    column:               id
+    with_wildcard_routes: true
+
+cms_slider:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                CmsSlider
+    module:               slider
+    prefix_path:          /slider
+    column:               id
+    with_wildcard_routes: true
+
+ha_news:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                HaNews
+    module:               news
+    prefix_path:          /news
+    column:               id
+    with_wildcard_routes: true
+
+doc_user:
+  url:   /dokumentation/anwender
+  param: { module: doc, action: user }
+
+doc_dev:
+  url:   /dokumentation/entwickler
+  param: { module: doc, action: dev }
+
+homepage:
+  url:   /
+  param: { module: home, action: index }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*
+
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /request_password
+  param: { module: sfGuardAuth, action: password }

@@ -1,0 +1,167 @@
+## YAML Template.
+---
+
+Category:
+  columns:
+    name: {type: string(255), notnull: true}
+
+SubCategory:
+  columns:
+    category_id: {type: integer, notnull: true}
+    name: {type: string(255), notnull: true}
+  relations:
+    Category: {foreignAlias: SubCategories}
+
+SubSubCategory:
+  columns:
+    sub_category_id: {type: integer, notnull: true}
+    name: {type: string(255), notnull: true}
+    is_active: {type: boolean, default: true}
+  relations:
+    SubCategory: {foreignAlias: SubSubCategories}
+
+DbCountry:
+  columns:
+    id_country:
+      type: integer(3)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    country_name_ru:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    country_name_en:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    iso:
+      type: string(2)
+      fixed: true
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    currency:
+      type: string(3)
+      fixed: true
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    currency_name:
+      type: string(10)
+      fixed: true
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    currency_rate:
+      type: float()
+      fixed: false
+      unsigned: true
+      primary: false
+      default: '1'
+      notnull: true
+      autoincrement: false
+
+DbRegion:
+  columns:
+    id_region:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    id_country:
+      type: integer(3)
+      fixed: false
+      unsigned: true
+      primary: false
+      notnull: true
+      autoincrement: false
+    region_name_ru:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    region_name_en:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    DbCountry: {local: id_country, foreign: id_country, type: one, foreignType: many}
+
+DbCity:
+  columns:
+    id_city:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: true
+      autoincrement: true
+    id_region:
+      type: integer(4)
+      fixed: false
+      unsigned: true
+      primary: false
+      notnull: true
+      autoincrement: false
+    id_country:
+      type: integer(3)
+      fixed: false
+      unsigned: true
+      primary: false
+      notnull: true
+      autoincrement: false
+    city_name_ru:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    city_name_en:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    DbCountry: {local: id_country, foreign: id_country, type: one, foreignType: many}
+    DbRegion: {local: id_region, foreign: id_region, type: one, foreignType: many}
+
+
+TestItem:
+  columns:
+    name: {type: string(255), notnull: true}
+    id_country: {type: integer(3), unsigned: true, notnull: true}
+    id_region: {type: integer(4), unsigned: true, notnull: true}
+    id_city: {type: integer(4), unsigned: true, notnull: true}
+    id_country2: {type: integer(3), unsigned: true }
+    id_city2: {type: integer(4), unsigned: true}
+    category_id: {type: integer, notnull: true}
+    sub_category_id: {type: integer, notnull: true}
+    sub_sub_category_id: {type: integer}
+  relations:
+    DbCountry: {local: id_country, foreign: id_country, foreignAlias: TestItems}
+    DbRegion: {foreignAlias: TestItems, local: id_region, foreign: id_region}
+    DbCity: {foreignAlias: TestItems, local: id_city, foreign: id_city}
+    DbCountry2: {class: DbCountry, foreignAlias: TestItems, local: id_country2, foreign: id_country}
+    DbCity2: {class: DbCity, foreignAlias: TestItems, local: id_city2, foreign: id_city}
+    Category: {foreignAlias: TestItems}
+    SubCategory: {foreignAlias: TestItems}
+    SubSubCategory: {foreignAlias: TestItems}

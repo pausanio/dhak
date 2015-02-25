@@ -1,0 +1,30 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Bestand
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          bestand
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        max_per_page:      100
+        title:             Bestände <small>Listenansicht</small>
+        actions:           {}
+        display:           [archiv_id, bestand_sig, bestandsname, status]
+      filter:
+        display:           [id, archiv_id, bestandsname, status]
+      form:
+        class:             BackendBestandForm
+      edit:
+        title:             Bestand "%%bestandsname%%" (%%id%%) bearbeiten
+        actions:
+          _list:         ~
+          _save:         ~

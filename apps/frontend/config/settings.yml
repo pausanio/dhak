@@ -1,0 +1,47 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/04-Settings
+
+prod:
+  .settings:
+    no_script_name:         true
+    logging_enabled:        false
+    cache:                  false
+
+dev:
+  .settings:
+    error_reporting:        <?php echo ((E_ALL) ^ E_DEPRECATED)."\n" ?># ATTENTION: E_STRICT has been desactivated only for phpBB3 forum
+    web_debug:              true
+    cache:                  false
+    no_script_name:         false
+    etag:                   false
+
+test:
+  .settings:
+    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
+    cache:                  false
+    web_debug:              false
+    no_script_name:         false
+    etag:                   false
+
+all:
+  .settings:
+    charset:                utf-8
+    i18n:                   on
+    default_culture:        de_DE
+
+    enabled_modules:        [default, sfGuardAuth, sfGuardForgotPassword, sfGuardRegister, sfCaptchaGD, sfChoiceChain, sfLucene]
+    standard_helpers:       [Partial, I18N, Cms]
+    csrf_secret:            2973829df24acecafce94f7c0a4c6cb4a6ab9297
+    escaping_strategy:      false
+    escaping_method:        ESC_SPECIALCHARS
+    use_database:           true
+
+  .actions:
+    login_module:           sfGuardAuth
+    login_action:           signin
+
+    secure_module:          sfGuardAuth
+    secure_action:          secure
+
+    error_404_module:       default
+    error_404_action:       error404

@@ -1,0 +1,32 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           HaProjekte
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ha_projekte
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        created_at: { label: Datum, date_format: dd.MM.y }
+        projekt_title: { label: Titel }
+        projekt_einsteller: { label: Einsteller }
+        projekt_type: { label: Projekttype }
+      list:
+        title: Projekte
+        display: [=projekt_title, projekt_einsteller, created_at, status]
+        sort: [created_at, desc]
+      filter:
+        display: [projekt_title, projekt_einsteller]
+      form:
+        display: [projekt_title, projekt_type, projekt_bestand, projekt_einsteller, status, projekt_notiz]
+      edit:
+        title: Projekt bearbeiten: <small>"%%projekt_title%%"</small>
+      new:
+        title: Neues Projekt

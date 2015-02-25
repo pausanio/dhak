@@ -1,0 +1,9 @@
+# Define any application specific rules to your models here
+# such as routing, partials, etc.
+
+DHASTK:
+  models:
+    Archiv:
+      route: /de/lesesaal/%model%/%id%/%signatur_slug%
+    Verzeichnungseinheit:
+      route: /de/lesesaal/verzeichnungseinheit/%id%/%signatur_slug%

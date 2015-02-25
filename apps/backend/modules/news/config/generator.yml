@@ -1,0 +1,38 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           HaNews
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ha_news
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        news_einsteller: { label: Autor}
+        publish_date:    { label: Datum, date_format: dd.MM.yy }
+        status:          { label: Online }
+        news_title:      { label: Titel }
+        news_text:       { label: Inhalt }
+      list:
+        title:    Aktuelles
+        display:  [=news_title, news_einsteller, publish_date, status]
+        sort:     [publish_date, desc]
+      filter:
+        display:  [news_title, news_einsteller, publish_date]
+      form:
+        display:  [publish_date, news_einsteller, status, news_title, news_text, image, tags]
+        fields:
+          publish_date:
+          news_title:
+           attributes: {size: 65}
+          tags: [_tags]
+      edit:
+        title: Meldung bearbeiten: <small>"%%news_title%%"</small>
+      new:
+        title: Neue Meldung

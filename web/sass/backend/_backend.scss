@@ -1,0 +1,261 @@
+/* Body and structure
+-------------------------------------------------- */
+
+body {
+  position: relative;
+  background: image-url("backend/background.png") repeat-x 0 40px;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+#sf_content {
+  padding-bottom: 50px;
+}
+
+section {
+  padding-top: 60px;
+}
+
+h1 {
+  margin: 28px 0;
+}
+
+h2 + table, h3 + table, h4 + table, h2 + .row {
+  margin-top: 5px;
+}
+
+table.v-align td {
+  vertical-align: middle;
+}
+
+/* Jumbotrons
+-------------------------------------------------- */
+
+.jumbotron {
+  padding-top: 28px;
+  h1 {
+    margin-bottom: 9px;
+    font-size: 48px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  p {
+    margin-bottom: 18px;
+    font-weight: 300;
+  }
+  .btn-large {
+    font-size: 20px;
+    font-weight: normal;
+    padding: 14px 24px;
+    margin-right: 10px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+  }
+}
+
+/* Navigation
+-------------------------------------------------- */
+
+ul li {
+  list-style: none;
+}
+
+.nav-list .nav-list {
+  padding-right: 0;
+}
+
+.nav-tabs li {
+  font-weight: bold;
+}
+
+.nav-list small {
+  font-size: 85%;
+}
+
+/* Forms
+-------------------------------------------------- */
+
+.form-signin {
+  max-width: 300px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+.sf_admin_filter select {
+  width: auto;
+}
+
+.sf_admin_filter_field_created_by select,
+.sf_admin_filter_field_updated_by select {
+  max-width: 200px;
+}
+
+/* modul: doc
+-------------------------------------------------- */
+
+body.doc {
+  section {
+    padding: $baseLineHeight 0;
+    margin: $baseLineHeight 0;
+    border-bottom: 1px solid $grayLighter;
+    ul {
+      li {
+        list-style: disc;
+      }
+    }
+  }
+}
+
+.affix {
+  margin-top: 50px;
+  li {
+    width: 230px;
+    background-color: #fff;
+    a {
+      small {
+        font-size: $fontSizeMini;
+      }
+    }
+  }
+}
+
+/* modul: news
+-------------------------------------------------- */
+
+#sf_admin_container .a-inline-taggable-widget-tag-container {
+  margin: 4px 0px;
+}
+
+#sf_admin_container .a-inline-taggable-widget-tag-container span.a-tag {
+  padding: 1px 4px 2px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 10.998px;
+  font-weight: bold;
+  line-height: 14px;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #999;
+  margin: 2px 2px 2px 0;
+}
+
+#sf_admin_container .a-inline-taggable-widget-tag-container span.a-tag a {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+/* modul: archiv
+-------------------------------------------------- */
+
+li.selected a {
+  color: red;
+}
+
+/* generic */
+
+button.btn a {
+  text-decoration: none;
+}
+
+/* tables */
+
+table {
+  background-color: #fff;
+  th {
+    text-align: left;
+  }
+}
+
+/* header */
+
+.sidebar-nav {
+  padding: 9px 0;
+  zoom: 1;
+  position: relative
+}
+
+/* helper classes */
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.f-left {
+  float: left;
+}
+
+.f-right {
+  float: right;
+}
+
+/* form extras */
+table.form {
+  width: 100%;
+  td {
+    width: 100%;
+  }
+  th {
+    white-space: nowrap;
+    text-align: left;
+    padding-right: 1em;
+  }
+  tbody input,
+  tbody textarea,
+  tbody select,
+  tbody .uneditable-input {
+    width: 410px;
+  }
+}
+
+/* rte textareas */
+textarea#cottbus_page_content {
+  height: 300px;
+}
+
+/* table */
+table.table-auto {
+  width: auto;
+}
+
+/* alerts */
+.alert .close {
+  border: 0px none;
+  background-color: transparent;
+}
+
+/* ajax tree */
+#loadingTree {
+  border: 1px solid #000;
+//  width: 101px;
+//  height: 101px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background: #fff image-url("loading.gif") no-repeat top center;
+//  position: absolute;
+//  top: 100px;
+//  left: 100px;
+  span {
+    display: block;
+    width: 101px;
+    height: 81px;
+    font-size: 10px;
+    text-align: center;
+    margin: 10px auto;
+  }
+}

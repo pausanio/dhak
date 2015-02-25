@@ -1,0 +1,33 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           HaFaq
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          ha_faq
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        question: {label: Frage }
+        answer: {label: Antwort }
+        pos: {label: Reihenfolge }
+        created_at: {label: erstellt, date_format: dd.MM.y}
+        updated_at: {label: geändert, date_format: dd.MM.y}
+      list:
+        title: FAQ
+        display: [=question, pos]
+        sort: [pos]
+      filter:
+        display: [question]
+      form:
+        display: [question,answer,pos]
+      edit:
+        title: FAQ bearbeiten: <small>"%%question%%"</small>
+      new:
+        title: Neue FAQ

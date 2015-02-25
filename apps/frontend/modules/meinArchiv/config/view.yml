@@ -1,0 +1,2 @@
+default:
+  javascripts: [/javascripts/lib/jquery.1.10.min.js, /javascripts/lib/bootstrap.min.js, /javascripts/lib/bootstrap.flash.js, -/javascripts/lib/jquery.listnav.min-2.1.js, -/javascripts/lib/jquery.expander.min.js, /javascripts/lib/jquery-ui-1.10.3.custom.min.js, -/javascripts/lib/jquery.sticky.js, /javascripts/frontend/application.js]

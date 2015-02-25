@@ -1,0 +1,286 @@
+# prestaForumConnectorPlugin
+
+The prestaForumConnectorPlugin aims to provide an easy way to connect an user management system to the forum solution of your choice.
+
+Just choose the connectors of your choice for the user management system on one part and for the forum solution, follow the install instructions and you will be able to use the same user database and the same login process.
+
+For example, this will allow you to connect sfGuard to phpBB3. Currently only sfGuard (Propel or Doctrine versions) and phpBB3 are supported. More will come.
+
+Extending the plugin in order to create a connector to an other user management system can be done very quickly.
+
+## Installation
+
+  * Install the plugin
+  
+	    [plain]
+	    ./symfony plugin:install prestaForumConnectorPlugin
+	    ./symfony cc
+	    
+  * Be sure to have the plugin enabled in /config/ProjectConfiguration.class.php
+		
+  * In /config/ProjectConfiguration.class.php in setup method add a connector to the clear:cache task event in order to clear forum cache when clearing project's cache
+	
+	    [php]
+	    // listen to symfony's clear:cache task's event
+	    $this->dispatcher->connect( 'task.cache.clear', array( 'prestaForumFactory', 'listenToClearCacheEvent' ) );
+	
+  * In /config/database.yml be sure to have a connection for the database that will contain forum's tables (can be the same database as for the project or a different one).
+	    
+  * In /config/app.yml add the following options (and personalize them for your needs)
+	
+	    [yaml]
+	    all:
+		  prestaForumConnector:
+		    userConnector:
+		      class:  presta%%UsedUserConnectorName%%Connector	# the name of the connector to use (here we use sfGuardPropel as user management tools)
+		      # param:
+		      	# for the required parameters see the help related to the connector that you're using 
+		      
+		    forumConnector:
+		      class:  presta%%UsedForumConnectorName%%Connector  # the name of the connector to use (here we use phpBB3 as forum platform tools)
+		      # param: 
+		        # for the required parameters see the help related to the connector that you're using
+		       
+		    forumWebDir:             <?php echo sfConfig::get('sf_web_dir');?>/forum/ # path to the forum directory 
+		    
+		    forumDatabaseId:        default  # the identifier of the database connection to use for the forum solution as defined in database.yml
+   
+  * If necessary add the following line to .htaccess file under the "RewriteEngine On" line
+   
+  		[plain]
+  		# redirect to the index file if index.php in not present in url for the forum
+  		RewriteRule ^forum/$ forum/index.php [QSA,L]
+  			
+  * See the help related to the connectors you use for continuing the installation.
+	
+  * Once the connector installation is finished launch the patchForum task, that will patch you're forum solution in order to link it with user management system.
+	
+	    [plain]
+	    ./symfony prestaForumConnector:patchForum frontend --env=dev
+	
+  * Once this task is finished and has succeed, you can synchronize your user database.
+	
+	    [plain]
+	    ./symfony prestaForumConnector:synchUser frontend all --env=dev
+	    
+  * In apps/%APP_NAME%/config/settings.yml, you should desactivate E_STRICT error_reporting to prevent the display of warning in the forum phpBB3 and also be able to connect to the board administration.
+
+		[yaml]
+		dev:
+	      .settings:
+	        error_reporting:        <?php echo (E_ALL)."\n" ?> # ATTENTION: E_STRICT has been desactivated only for phpBB3 forum
+
+## Forum Connectors
+
+### PHPBB3 
+
+#### Installation
+  
+  * In /config/app.yml define the following options for the forumConnector
+  
+  		[plain]
+		all:
+		  prestaForumConnector:
+  		    forumConnector:
+		      class:  prestaPhpBB3Connector
+		      
+  * In /web/index.php Replace
+    	
+    	[php]
+    	sfContext::createInstance($configuration)->dispatch();
+    	
+    With
+    
+    	[php]
+		if(!defined('SYMFONY_FORUM'))
+		{
+			sfContext::createInstance($configuration)->dispatch();
+		}
+
+  * Copy all the forum files inside you're web directory (eg: /web/forum/). Use here the name that will appears in the URL (no .htacess redirection on directory name are actually possible).
+  
+  * Commit your project, in order to have an original version of you're forum code.
+  
+  * Add svn:ignore * (or similar command for your versionning tool) to "/cache/", "/files/", "/store/" and "/images/avatars/upload/" forum's sub-directories (and other cache directories of the eventually installed mod)
+  
+  * Access to the forum in you're navigator and follow the installation instruction of phpBB3.
+  
+  * Commit your project again, in order to have the freshly installed version of you're forum code.
+  
+  * Delete the phpBB3's "install" directory and commit again you're project.  
+  
+ 
+#### Usage
+
+Notice that when some code that interact with this plugin is executed it require that an application has been instanciated. 
+This should always be the case for HTPP request, but not always the case for symfony tasks.
+So if you use tasks that have an optionnal "application" parameter (like for sfGuardPlugin), ensure to fill this parameter.
+
+##### Promote a user as super admin
+
+In order to promote a user as a super admin, launch the following task once everything has be installed. The user id given here is the user ID of the user management tools 
+
+	[plain]
+	./symfony prestaForumConnector:promoteUser frontend %userIdToPromote% --env=dev
+
+This taks will ask for user's password, and ask if the user should be considered as the forum's founder.
+
+A notice appears when you execute the task but the user has been properly promoted. It's a phpBB3 error.
+
+	[plain]
+	<b>[phpBB Debug] PHP Notice</b>: in file <b>/includes/functions.php</b> on line <b>223</b>: <b>Undefined index: rand_seed_last_update</b><br />
+	
+* A link to the administration interface will appear in the footer on the index page and a new authentication will be requested to access it.
+
+#### Forum upgrade
+
+If you want to do a forum upgrade (eg from v3.0.5 to v3.0.6), it is recommanded that you reinstall the forum from scratch in order to get the forum patcher to work. 
+
+
+## User Connectors
+
+### sfGuard - Propel version
+
+#### Installation
+
+  * Be sure to have sfGuardPlugin installed and configured
+
+  * In /config/app.yml define the following option for the userConnector:
+	
+		[plain]
+		all:
+		  prestaForumConnector:
+		    userConnector:
+		      class:  prestaSfGuardPropelConnector
+		      param: 
+		        getUsernameMethod:  getUsername	# define here the name of the sfGuardUser's method to use for retrieving the username
+		        getEmailMethod:     getEmail	# define here the name of the sfGuardUser's method to use for retrieving the email. Can be getUsername if the username is the email. If needed create yourself this method if the email is stored in another table like the profile table.
+		        getCultureMethod:   getCulture	# define here the name of the sfGuardUser's method to use for retrieving the user's preferred culture. If needed create yourself this method if the culture is stored in another table like the profile table or if it is a constant.
+	        
+  * Change the parent class in `myUser.class.php`
+
+        [php]
+        class myUser extends prestaForumConnectorSfGuardPropelSecurityUser
+        {
+        }	 
+        
+  * Add the following methods to sfGuardUser.php in order to synchronize forum's users when sfGuard's users are updated
+  
+        [php]
+	    /**
+		 * Override save method in order to update the forum's user
+		 * 
+		 * @see		sfGuardPlugin/lib/model/om/BasesfGuardUser#save($con)
+		 * @param	PropelPDO $con	optional connection parameter
+		 * @return	void
+		 */
+		public function save(PropelPDO $con = null)
+		{
+			parent::save($con);
+			prestaForumFactory::getForumConnectorInstance()->synchUser( $this->getId() );
+		}
+		
+		/**
+		 * Override delete method in order to update the forum's user
+		 * 
+		 * @see		sfGuardPlugin/lib/model/plugin/PluginsfGuardUser#delete($con)
+		 * @param	PropelPDO $con	optional connection parameter
+		 * @return	void
+		 */
+		public function delete(PropelPDO $con = null)
+		{
+			$userId = $this->getId();
+			parent::delete($con);
+			prestaForumFactory::getForumConnectorInstance()->deleteForumUser( $userId );
+		}
+
+
+
+### sfGuard - Doctrine version
+
+#### Installation
+
+  * Be sure to have sfDoctrineGuardPlugin installed and configured
+
+  * In /config/app.yml define the following option for the userConnector:
+	
+		[plain]
+		all:
+		  prestaForumConnector:
+		    userConnector:
+		      class:  prestaSfGuardDoctrineConnector
+		      param: 
+		        getUsernameMethod:  getUsername	# define here the name of the sfGuardUser's method to use for retrieving the username
+		        getEmailMethod:     getEmail	# define here the name of the sfGuardUser's method to use for retrieving the email (should be getEmailAddress for latest sfDoctrineGuardPlugin). Can be getUsername if the username is the email. If needed create yourself this method if the email is stored in another table like the profile table.
+		        getCultureMethod:   getCulture	# define here the name of the sfGuardUser's method to use for retrieving the user's preferred culture. If needed create yourself this method if the culture is stored in another table like the profile table or if it is a constant.
+	
+	**Warning:** If you use latest sfDoctrineGuardPlugin version with email field included, be sure to redefine the 'getEmailMethod' to 'getEmailAddress'.
+	        
+  * Change the parent class in `myUser.class.php`
+
+        [php]
+        class myUser extends prestaForumConnectorSfGuardDoctrineSecurityUser
+        {
+        }	 
+        
+  * Add the following methods to sfGuardUser.php in order to synchronize forum's users when sfGuard's users are updated
+  
+        [php]
+	    /**
+		 * Override save method in order to update the forum's user
+		 * 
+		 * @param	Doctrine_Connection $conn	optional connection parameter
+		 * @return	void
+		 */
+    	public function save(Doctrine_Connection $conn = null)
+    	{
+    		parent::save( $conn );
+			prestaForumFactory::getForumConnectorInstance()->synchUser( $this->getId() );
+		} 
+		
+		/**
+		 * Override delete method in order to update the forum's user
+		 * 
+		 * @param	Doctrine_Connection $conn	optional connection parameter
+		 * @return	void
+		 */
+		public function delete(Doctrine_Connection $conn = null)
+		{
+			$userId	= $this->getId();
+			parent::delete( $conn );
+			prestaForumFactory::getForumConnectorInstance()->deleteForumUser( $userId );
+		}
+
+## Changelog
+
+### 2012-06-07 | 1.0.5
+
+Add pgSQL compatibility
+Fixed admin permissions when you promote an user
+Update README file
+Update unit tests
+
+
+
+### 2010-12-09 | 1.0.4
+
+  * [bugfix] If the user-agent of the people who is trying to login is more than 150 chars length, then it would throw an error
+
+
+### 2010-01-05 | 1.0.3
+  * Fix code of the phpBB3 connector that was using mysql specific function instead of abstraction ones
+  * Remove propel in a var name as it's not propel related
+	        
+### 2010-01-04 | 1.0.2
+  * Ensure compatibility with phpBB v3.0.6
+
+### 2009-12-29 | 1.0.1
+  * Tested with latest sfDoctrineGuardPlugin version that include email field in sf_guard_user  
+  
+### 2009-11-24 | 1.0.0
+  * First public version
+  * Tested successfully on production for one project
+  * Tested in symfony 1.2 and 1.4 
+  
+### 2009-11-09 | 0.0.1
+  * First internal beta version

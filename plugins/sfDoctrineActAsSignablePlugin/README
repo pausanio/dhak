@@ -1,0 +1,109 @@
+sfDoctrineActAsSignablePlugin
+=============================
+
+The `sfDoctrineActAsSignablePlugin` plugin automates the handling of `created_by`
+and `updated_by` columns. Each time a __Signable__ object is inserted or updated,
+those columns are automatically updated accordingly to the user who saved the
+changes.
+
+Instalation
+===========
+
+Install the plugin via the subversion repository by executing the following
+command from the project root directory:
+
+    $ svn co http://svn.symfony-project.com/plugins/sfDoctrineActAsSignablePlugin/trunk plugins/sfDoctrineActAsSignablePlugin
+
+or by using the default symfony plugin install command:
+
+    $ ./symfony plugin:install sfDoctrineActAsSignablePlugin
+
+Usage
+=====
+
+Add the desired columns to your schema.yml for the tables you want to be signed.
+You can use a string or an int type, the behavior will automatically detect the
+type and store the corresponding information depending on this type (for a
+string the username is stored, and for an integer it's the user's ID).
+
+    # You can either set the type of a column to a string (will store the username) or an integer (will store the user ID)
+
+    actAs:
+      Signable:
+        created:
+          name: created_by
+          type: integer
+          options:
+            notnull: true
+            default: 1
+        updated:
+          name: updated_by
+          type: string
+
+Also you may use global behavior in your doctrine schema (default field value is
+integer):
+
+    actAs: [Timestampable, Signable]
+
+Dependencies
+============
+
+There is no required dependency, although :
+
+  * [sfDoctrineGuardPlugin](http://www.symfony-project.org/plugins/sfDoctrineGuardPlugin)
+    will provide you basic but flexible and robust user management.
+
+Relations
+---------
+
+The plugin is provided with behavior relations for __sfDoctrineGuardPlugin__.
+For created and updated options which are defined as active (__not disabled__)
+and __integer type__, __creator__ and __updator__ relations are available,
+respectively. This means, that if you attach Signable behavior (defined as
+mentioned above) to any of your model, you can directly access sfGuardUser
+class objects. For example, the _Article_ model is defined as follows:
+
+    Article:
+      actAs:
+        Signable: ~
+
+you can access the user who created/updated the Article (integer option is the
+default in the Signable):
+
+    [php]
+    echo $article->getCreator();
+    echo $article->getUpdator()->customMethod();
+
+Example use cases
+=================
+
+Here are some example cases when you may find this plugin useful:
+
+string user reference
+---------------------
+
+The project includes a blog or a forum system. Each blog/forum post page needs
+to display the user who posted it (or modified it last time). The symfony forum
+screenshot last column shows LAST POST, user name is highlighted in red
+(__Singable__ behavior) and the timestamp is highlighted in green
+(__Timestampable__ behavior):
+
+![symfony forum](http://img191.imageshack.us/img191/9010/forummg.png "symfony forum")
+
+integer user reference
+----------------------
+
+The more advanced technique is to use an integer created_by/updated_by column
+(the default) to store the user's ID (need to have appropriate user table, e.g.
+[sfDoctrineGuardPlugin](http://www.symfony-project.org/plugins/sfDoctrineGuardPlugin)).
+In this case you may use relations and fetch User object at runtime (which is
+very difficult if you store user name as a string).
+
+This option is very useful when developing a CRM or ERP system where data
+modification is important (could be combined with data versioning).
+
+Thanks to
+---------
+
+Thomas Boerger, Michael Klein, Kary Leong, geoffrey:
+[The snippet this plugin is based on](http://snippets.symfony-project.org/snippet/281 "Snippet").

@@ -1,0 +1,99 @@
+# sfDoctrineChoiceChainPlugin plugin (for symfony 1.3) #
+
+The `sfDoctrineChoiceChainPlugin` is a symfony plugin that provides the ability to create a chain of dependant `select` elements that regenerate their options list depending on your choice
+
+
+It gives you `sfWidgetFormDoctrineChoiceChain` widget plus the corresponding `sfValidatorChoiceChain` validator plus module to handle XHR requests
+
+## Installation ##
+
+  * Install the plugin (via a package)
+
+        symfony plugin:install sfDoctrineChoiceChainPlugin
+
+  * Publish plugin assets
+
+        symfony plugin:publish-assets
+
+  * Enable the plugin module
+
+        all:
+          .settings:
+            enabled_modules:      [default, sfChoiceChain]
+
+  * Clear your cache
+
+        symfony cc
+
+
+## Usage ##
+
+  * Suppose you have the following schema:
+
+        Country:
+          columns:
+            name: {type: string(255), notnull: true}
+
+        Region:
+          columns:
+            country_id: {type: integer, notnull: true}
+            name: {type: string(255), notnull: true}
+          relations:
+            Country: {local: country_id, foreign: id, onDelete: CASCADE, foreignAlias: Regions}
+
+        City:
+          columns:
+            region_id: {type: integer, notnull: true}
+            name: {type: string(255), notnull: true}
+            is_capital: {type: boolean, default: false}
+          relations:
+            Region: {local: region_id, foreign: id, onDelete: CASCADE, foreignAlias: Cities}
+
+
+        Location:
+          columns:
+            name: {type: string(255), notnull: true}
+            country_id: {type: integer}
+            region_id: {type: integer}
+            city_id: {type: integer}
+            #here goes more fields
+          relations:
+            Country: {local: country_id, foreign: id, onDelete: CASCADE, foreignAlias: Locations}
+            Region: {local: region_id, foreign: id, onDelete: CASCADE, foreignAlias: Locations}
+            City: {local: city_id, foreign: id, onDelete: CASCADE, foreignAlias: Locations}
+
+You want your visitors to create new locations and you want them to choose first country, then load the country regions and then the cities
+
+  * In your form
+
+          $this->widgetSchema['location'] = new sfWidgetFormDoctrineChoiceChain(array(
+                 'chain' => array('Country', 'Region', 'City')
+          ));
+
+          $this->validatorSchema['location'] = new sfValidatorChoiceChain(array(
+                'chain' => array('Country', 'Region', 'City')
+          ));
+
+This will give you 3 `select` elements, changing the values of each you will get the next one refilled with new values
+
+## Enhanced example ##
+
+To see more sophisticated examples you will have to enabled sfChoiceChainExample module that goes with the plugin
+
+  * Enable an example module
+        all:
+          .settings:
+            enabled_modules:      [default, sfChoiceChain, sfChoiceChainExample]
+
+  * Copy yaml schema from sfChoiceChainExample/config/schema.yml to your project schema.yml file and build model and forms
+
+        symfony doctrine:build --model --forms
+
+  * Copy model classes from sfChoiceChainExample/lib/model to your model directory, existing model will be overwritten
+
+  * Run sfChoiceChainExample.sql from sfChoiceChainExample/data. It is preferable to run this script rather than insert sql generated from schema, as it has all neccessary data included
+
+  * Clear symfony cache and go to /sfChoiceChainExample to check out the scene
+
+All posible widget/validator configurations are displayed in sfChoiceChainExample/lib/form/PluginTestItemForm.class.php, see `configure` method. `updateObject` and `updateDefaultsFromObject` methods will give you an example of dealing with the data and `offsetGet` method enables separate rendering.
+        

@@ -1,0 +1,24 @@
+#validation
+validation.bestand: 
+  adapter: FileSpool
+  options:
+    name: validation
+    path: <?php echo sfConfig::get('app_import_bestand') ?> 
+#import
+import.bestand: 
+  adapter: FileSpool
+  options:
+    name: import
+    path: <?php echo sfConfig::get('app_import_bestand') ?> 
+#validation
+validation.verzeichnungseinheit: 
+  adapter: FileSpool
+  options:
+    name: validation
+    path: <?php echo sfConfig::get('app_import_verzeichnungseinheit') ?> 
+#import
+import.verzeichnungseinheit: 
+  adapter: FileSpool
+  options:
+    name: import
+    path: <?php echo sfConfig::get('app_import_verzeichnungseinheit') ?> 

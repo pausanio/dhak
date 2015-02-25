@@ -1,0 +1,35 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Dokument
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          dokument
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions:             ~
+      fields:              ~
+      list:
+        max_per_page:      50
+        title:             Dokumente <small>Listenansicht</small>
+        #actions:           {}
+        batch_actions:     {}
+        display:           [id, titel, archiv_id, bestand_sig, signatur, verzeichnungseinheit]
+        table_method:      retrieveBackendDokumentList
+      filter:
+        display:           [id, titel, bestand_sig, signatur]
+      form:    ~
+      edit:
+        title:             Dokument "%%titel%%" (%%id%%) bearbeiten
+        actions:
+          _list:         ~
+          _save:         ~
+      new:
+        title:             Neues Dokument
+        actions:
+          _save_and_add: ~

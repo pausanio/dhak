@@ -1,0 +1,23 @@
+#------------------------------------------------------------------------------
+# Backend view setup
+#
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+#------------------------------------------------------------------------------
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        TITLE (apps/backend/view.yml)
+    description:  DESCRIPTION (apps/backend/view.yml)
+    language:     de
+    robots:       noindex, nofollow
+
+  stylesheets:    [/stylesheets/backend.css]
+
+  javascripts:    [/javascripts/lib/jquery.1.8.3.min.js, /javascripts/lib/bootstrap.min.js, /javascripts/lib/tiny_mce/tiny_mce.js, /javascripts/lib/jquery-ui-1.8.24.min.js, /javascripts/lib/jquery.treeTable.js, /javascripts/lib/treeTableDragDrop.js, /javascripts/backend/infocms.js]
+
+  has_layout:     true
+  layout:         layout

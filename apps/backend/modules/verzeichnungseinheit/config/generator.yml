@@ -1,0 +1,31 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Verzeichnungseinheit
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          verzeichnungseinheit
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        max_per_page:      100
+        title:             Verzeichnungseinheiten <small>Listenansicht</small>
+        actions:           {}
+        display:           [titel, bestand_sig, signatur, laufzeit, status]
+        table_method:      retrieveBackendVerzeichnungseinheitList
+      filter:
+        display:           [id, titel, signatur, status]
+      form:
+        class:             BackendVerzeichnungseinheitForm
+      edit:
+        title:             Verzeichnungseinheit "%%titel%%" (%%id%%) bearbeiten
+        actions:
+          _list:          ~
+          _save:          ~
